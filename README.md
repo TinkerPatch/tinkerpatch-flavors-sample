@@ -8,7 +8,7 @@
 
 ----
 
-在TinkerPatchSupport中添加如下字段, 如果你只是多渠道的需求，建议不要使用Flavor。多flavor必须在后台建立相应的基线工程(命名规则为：appVersion_flavorName)，每次生成补丁时也必须对应的生成多个分别上传。
+在TinkerPatchSupport中添加如下字段, 如果你只是多渠道的需求，建议不要使用Flavor。多flavor必须在后台建立相应的基线工程(如下例子的命名规则为：appVersion_flavorName)，每次生成补丁时也必须对应的生成多个分别上传。
 
 这里增加了`tinkerPatchAllFlavorsDebug` 和 `tinkerPatchAllFlavorsRelease` 用于一次性生成所有flavors的Patch包。
 
@@ -20,6 +20,7 @@
     productFlavors {
         flavor {
             flavorName = "flavor1"
+            // 后台需要按照每个flavor的appVersion来建立独立的工程，并单独下发补丁
             appVersion = "${tinkerpatchSupport.appVersion}_${flavorName}"
 
             pathPrefix = "${bakPath}/${baseInfo}/${flavorName}${variantName}/"
@@ -32,6 +33,7 @@
 
         flavor {
             flavorName = "flavor2"
+            // 后台需要按照每个flavor的appVersion来建立独立的工程，并单独下发补丁
             appVersion = "${tinkerpatchSupport.appVersion}_${flavorName}"
 
             pathPrefix = "${bakPath}/${baseInfo}/${flavorName}${variantName}/"
