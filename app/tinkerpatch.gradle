@@ -1,3 +1,6 @@
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 apply plugin: 'tinkerpatch-support'
 
 def bakPath = file("${buildDir}/bakApk/")
@@ -10,7 +13,7 @@ def variantName = "debug"
  */
 tinkerpatchSupport {
     /** 可以在debug的时候关闭 tinkerPatch **/
-    tinkerEnable = true
+    tinkerEnable = isRelease()
     reflectApplication = true
 
     autoBackupApkPath = "${bakPath}"
@@ -98,5 +101,32 @@ tinkerPatch {
     }
     buildConfig {
         keepDexApply = false
+    }
+}
+
+/**
+ * 如果只想在Release中打开tinker，可以把tinkerEnable赋值为这个函数的return
+ * @return 是否为release
+ */
+def isRelease() {
+    Gradle gradle = getGradle()
+    String  tskReqStr = gradle.getStartParameter().getTaskRequests().toString()
+
+    Pattern pattern;
+    if (tskReqStr.contains("assemble")) {
+        println tskReqStr
+        pattern = Pattern.compile("assemble(\\w*)(Release|Debug)")
+    } else {
+        pattern = Pattern.compile("generate(\\w*)(Release|Debug)")
+    }
+    Matcher matcher = pattern.matcher(tskReqStr)
+
+    if (matcher.find()) {
+        String task = matcher.group(0).toLowerCase()
+        println("[BuildType] Current task: " + task)
+        return task.contains("release")
+    } else {
+        println "[BuildType] NO MATCH FOUND"
+        return true;
     }
 }

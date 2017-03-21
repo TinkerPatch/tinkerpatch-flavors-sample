@@ -6,6 +6,14 @@
 
 多Flavors的Sample
 
+----
+
+在TinkerPatchSupport中添加如下字段, 如果你只是多渠道的需求，建议不要使用Flavor。多flavor必须在后台建立相应的基线工程(命名规则为：appVersion_flavorName)，每次生成补丁时也必须对应的生成多个分别上传。
+
+这里增加了`tinkerPatchAllFlavorsDebug` 和 `tinkerPatchAllFlavorsRelease` 用于一次性生成所有flavors的Patch包。
+
+**如果只是多渠道的需求，建议不要使用flavor的方式。首先其打包很慢，其次需要维护多个基线包，后期维护成本也很大。Tinker官方推荐 [packer-ng-plugin](https://github.com/mcxiaoke/packer-ng-plugin )或者 [walle](https://github.com/Meituan-Dianping/walle) 来进行多渠道打包，其中walle是支持最新的SchemaV2签名的。**
+
 在tinkerpatchSupport增加如下字段：
 
 ```gradle
