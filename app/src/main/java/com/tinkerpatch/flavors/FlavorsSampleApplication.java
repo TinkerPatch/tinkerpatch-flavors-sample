@@ -54,10 +54,17 @@ public class FlavorsSampleApplication extends Application {
 
     }
 
+    /**
+     * 我们需要确保至少对主进程跟patch进程初始化 TinkerPatch
+     */
     @Override
     public void onCreate() {
         super.onCreate();
         // 我们可以从这里获得Tinker加载过程的信息
+        initTinker();
+    }
+
+    private void initTinker() {
         if (BuildConfig.TINKER_ENABLE) {
             tinkerApplicationLike = TinkerPatchApplicationLike.getTinkerPatchApplicationLike();
 
@@ -67,8 +74,9 @@ public class FlavorsSampleApplication extends Application {
                 .setPatchRollbackOnScreenOff(true)
                 .setPatchRestartOnSrceenOff(true);
 
-            // 每隔3个小时去访问后台时候有更新,通过handler实现轮训的效果
-            new FetchPatchHandler().fetchPatchWithInterval(3);
+            // 每隔3个小时去访问后台时候有更新, 通过 handler 实现轮询的效果
+            // 默认 setFetchPatchIntervalByHours 只是设置调用的频率限制，并没有去轮询
+            TinkerPatch.with().startPoll(3);
         }
     }
 
