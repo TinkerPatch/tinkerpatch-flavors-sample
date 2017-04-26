@@ -4,8 +4,8 @@ import java.util.regex.Pattern
 apply plugin: 'tinkerpatch-support'
 
 def bakPath = file("${buildDir}/bakApk/")
-def baseInfo = "app-1.0.0-0226-14-42-00"
-def variantName = "debug"
+def baseInfo = "app-1.0.0-0426-18-52-32"
+def variantName = "release"
 
 /**
  * 对于插件各参数的详细解析请参考
@@ -36,7 +36,7 @@ tinkerpatchSupport {
      **/
     productFlavors {
         flavor {
-            flavorName = "flavor1"
+            flavorName = "protect"
             appVersion = "${tinkerpatchSupport.appVersion}_${flavorName}"
 
             pathPrefix = "${bakPath}/${baseInfo}/${flavorName}-${variantName}/"
@@ -45,10 +45,12 @@ tinkerpatchSupport {
             baseApkFile = "${pathPrefix}/${name}.apk"
             baseProguardMappingFile = "${pathPrefix}/${name}-mapping.txt"
             baseResourceRFile = "${pathPrefix}/${name}-R.txt"
+
+            protectedApp = true
         }
 
         flavor {
-            flavorName = "flavor2"
+            flavorName = "flavor1"
             appVersion = "${tinkerpatchSupport.appVersion}_${flavorName}"
 
             pathPrefix = "${bakPath}/${baseInfo}/${flavorName}-${variantName}/"

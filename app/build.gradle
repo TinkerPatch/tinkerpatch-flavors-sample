@@ -42,12 +42,12 @@ android {
     }
 
     productFlavors {
-        flavor1 {
-            applicationId 'com.tinkerpatch.easy_sample.flavor1'
+        protect {
+            applicationId 'com.tinkerpatch.easy_sample.protected'
         }
 
-        flavor2 {
-            applicationId 'com.tinkerpatch.easy_sample.flavor2'
+        flavor1 {
+            applicationId 'com.tinkerpatch.easy_sample.flavor1'
         }
     }
 }
