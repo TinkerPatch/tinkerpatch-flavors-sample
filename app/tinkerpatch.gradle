@@ -46,6 +46,7 @@ tinkerpatchSupport {
             baseProguardMappingFile = "${pathPrefix}/${name}-mapping.txt"
             baseResourceRFile = "${pathPrefix}/${name}-R.txt"
 
+            /** 开启加固开关，上传此flavor的apk到加固网站进行加固 **/
             protectedApp = true
         }
 
