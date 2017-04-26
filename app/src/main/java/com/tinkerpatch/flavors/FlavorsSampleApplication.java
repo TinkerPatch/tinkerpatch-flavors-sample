@@ -72,11 +72,11 @@ public class FlavorsSampleApplication extends Application {
             TinkerPatch.init(tinkerApplicationLike)
                 .reflectPatchLibrary()
                 .setPatchRollbackOnScreenOff(true)
-                .setPatchRestartOnSrceenOff(true);
+                .setPatchRestartOnSrceenOff(true)
+                .setFetchPatchIntervalByHours(3);
 
-            // 每隔3个小时去访问后台时候有更新, 通过 handler 实现轮询的效果
-            // 默认 setFetchPatchIntervalByHours 只是设置调用的频率限制，并没有去轮询
-            TinkerPatch.with().startPoll(3);
+            // 每隔3个小时(通过setFetchPatchIntervalByHours设置)去访问后台时候有更新,通过handler实现轮训的效果
+            TinkerPatch.with().fetchPatchUpdateAndPollWithInterval();
         }
     }
 
