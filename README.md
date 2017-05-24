@@ -84,20 +84,20 @@
 
 1. 生成开启`protectedApp = true`的基础包（这里假设此APK名为：`protected.apk`）  
 2. 上传`protected.apk`到相应的加固网站进行加固，并发布应用市场（请遵循各个加固网站步骤，一般为下载加固包-》重新签名-》发布重签名加固包）  
-3. 在tinkerPatch后台根据appVersion建立相应的App版本（比如这里2个flavor，就需要建立2个App版本。App版本即为各自flavor中配置的appVersion） 
+3. 在tinkerPatch后台根据appVersion建立相应的App版本（比如这里2个flavor，就需要建立2个App版本。App版本即为各自flavor中配置的appVersion）
 4. 生成各个flavor的patch包，并上传至相应的App版本中。
 
 **protectedApp=true, 这种模式仅仅可以使用在加固应用中**
 
 ### 支持列表:
 
-| 加固厂商 | 测试      | 
-| --------| --------- | 
-| 乐加固   | Tested  | 
+| 加固厂商 | 测试      |
+| --------| --------- |
+| 乐加固   | Tested  |
 | 爱加密   |  Tested |
 | 梆梆加固 | Tested  |
-| 360加固 | 暂不支持，需要等待新版本发布 | 
-| 其他    | 请自行测试，只要满足下面规则的都可以支持 | 
+| 360加固 | Tested  |
+| 其他    | 请自行测试，只要满足下面规则的都可以支持 |
 
 
 这里是否支持加固，需要加固厂商明确以下两点：
