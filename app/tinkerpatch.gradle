@@ -13,7 +13,7 @@ def variantName = "release"
  */
 tinkerpatchSupport {
     /** 可以在debug的时候关闭 tinkerPatch **/
-    tinkerEnable = isRelease()
+    tinkerEnable = true
     reflectApplication = true
 
     autoBackupApkPath = "${bakPath}"
